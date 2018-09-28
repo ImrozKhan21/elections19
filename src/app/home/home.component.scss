@@ -1,0 +1,30 @@
+.home-wrapper{
+  height: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .form-section{
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+
+    button{
+      width:150px;
+    }
+
+  }
+  .india-map{
+    height: 580px;
+    width: 550px;
+    margin: 10px;
+  }
+  @media only screen and (max-width: 992px) {
+    flex-direction: column;
+
+    .india-map{
+      margin-top: 20px;
+    }
+  }
+}
+

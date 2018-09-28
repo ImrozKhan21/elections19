@@ -1,0 +1,28 @@
+<div class="home-wrapper">
+
+  <form class="form-section" [formGroup]="profileForm">
+    <mat-form-field>
+      <mat-select placeholder="State" [formControl]="stateControl">
+        <mat-option *ngFor="let state of states" [value]="state.code">
+          {{state.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--  <mat-form-field>
+        <mat-select placeholder="Favorite food">
+          <mat-option *ngFor="let constituency of constituencies" [value]="food.value">
+            {{constituency.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>-->
+
+    <button mat-raised-button color="primary" (click)="submitForm()">Find</button>
+
+  </form>
+
+  <div>
+    <img class="india-map" src="../../assets/images/map.jpg">
+  </div>
+
+</div>

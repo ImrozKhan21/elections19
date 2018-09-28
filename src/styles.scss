@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+
+// some basic resets
+
+body {
+  font-family: Roboto, sans-serif;
+  background-color: rgb(43, 50, 61);
+  background-size: contain;
+  }
+
+#google_translate_element{
+  margin-top: -15px;
+  margin-left: 15px;
+  text-align: right;
+}
+
+.container {
+  margin: 20px;
+  display:flex;
+  flex-direction: column;
+}
+
+
+
+$lt-gray: #ddd;
+$background-dark: #512DA8;
+$background-light: #9575CD;
+$background-pale: #D1C4E9;
+$primary-color-dark:   #512DA8;
+$primary-color:        #673AB7;
+$primary-color-light:  #D1C4E9;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #FFC107;
+$primary-text-color:   #212121;
+$secondary-text-color: #757575;
+$divider-color:        #BDBDBD;
+
+@mixin zero-margin($pad-up-down, $pad-left-right) {
+  margin: 0px auto;
+  padding: $pad-up-down $pad-left-right;
+}
+
+.background-primary {
+  background-color: $background-dark!important;
+}
+.background-accent {
+  background-color: $accent-color!important;
+}
+.text-floral-white {
+  color: floralwhite!important;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.margin-bottom{
+
+  &10{
+    margin-bottom: 10px !important;
+  }
+  &30{
+    margin-bottom: 30px !important;
+  }
+
+}
+
+.highlight {
+  background-color: $background-pale;
+  border: 1px solid $primary-color-dark;
+  z-index: 1;
+  transform: scale(1.01);
+  cursor: pointer;
+}
