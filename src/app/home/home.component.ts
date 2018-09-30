@@ -13,9 +13,12 @@ export class HomeComponent implements OnInit {
   public profileForm : FormGroup;
   public stateControl : AbstractControl;
   public constituencyControl: AbstractControl;
+  public ministerControl: AbstractControl;
   public constituencies = CONSTITUENCIES;
   public stateConstituencies;
   public ministers;
+  public ministerSelected;
+  public constituencySelected?: string;
 
   constructor(private fb: FormBuilder) {
   }
@@ -27,17 +30,18 @@ export class HomeComponent implements OnInit {
   createForm() {
     this.profileForm = this.fb.group({
       state: new FormControl(''),
-      constituency: new FormControl('')
+      constituency: new FormControl(''),
+      minister: new FormControl('')
     });
 
     this.stateControl = this.profileForm.controls['state'];
     this.constituencyControl = this.profileForm.controls['constituency'];
+    this.ministerControl = this.profileForm.controls['minister'];
     this.listenToValueChange();
   }
 
   listenToValueChange(){
     this.stateControl.valueChanges.subscribe(stateSelected => {
-      this.ministers = null;
       this.setToDefault();
       this.showParticularConstituency(stateSelected);
       console.log("STATE SELE", stateSelected)
@@ -45,6 +49,7 @@ export class HomeComponent implements OnInit {
   }
 
   setToDefault(){
+    this.ministers = null;
     this.constituencyControl.setValue('');
   }
 
@@ -56,17 +61,22 @@ export class HomeComponent implements OnInit {
 
   updateMinisterOnValueChange(){
     this.constituencyControl.valueChanges.subscribe(constituencySelected => {
+      this.updateMinisterSelected();
+      this.constituencySelected = constituencySelected ? constituencySelected : null;
       this.ministers = constituencySelected ? this.getParticularConstituency(constituencySelected).ministers : null;
-      console.log("ministers SELE", constituencySelected, this.ministers)
+    })
+  }
+
+  updateMinisterSelected(){
+    console.log("minister selected");
+    this.ministerControl.valueChanges.subscribe(minister => {
+      this.ministerSelected = minister;
+      console.log("minister selected", minister);
     })
   }
 
   getParticularConstituency(code){
     return this.stateConstituencies.find(item => item.code === code) || {}
-  }
-
-  submitForm(){
-    console.log("SUBIT", this.profileForm.get('state').value)
   }
 
 }

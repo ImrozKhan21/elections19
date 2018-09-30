@@ -17,19 +17,19 @@
         </mat-select>
       </mat-form-field>
 
-    <div *ngIf="ministers && ministers.length" class="ministers-all">
+    <div class="ministers-all" *ngIf="ministers && ministers.length">
       <mat-form-field class="ministers-dropdown">
-        <mat-select placeholder="MINISTERS">
+        <mat-select placeholder="MINISTERS" [formControl]="ministerControl">
           <mat-option *ngFor="let minister of ministers" [value]="minister.id">
             {{minister.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" [routerLink]="['/ministers', 'AN1']">Show all</button>
+      <button mat-raised-button color="primary" [routerLink]="['/ministers', constituencySelected]">Show all</button>
     </div>
 
-    <button mat-raised-button color="primary" [routerLink]="['/minister', 'm-an1']">Find</button>
+    <button *ngIf="ministerSelected" mat-raised-button color="primary" [routerLink]="['/minister', ministerSelected]">Find</button>
 
   </form>
 
