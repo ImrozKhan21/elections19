@@ -16,6 +16,5 @@ export const MINISTERS = {
     criminalRecord: 'She is criminal',
     details: '2 Corrupt Lorem ipsum check data, Lorem ipsum check data, Lorem ipsum check data, Lorem ipsum check data ',
     image: '../assets/images/m2.jpg'
-
   }
 };

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {STATES} from '../models/app.constants';
 import {FormBuilder, FormGroup, Validators, FormControl, AbstractControl} from '@angular/forms';
-import {CONSTITUENCIES} from '../models/constituencies';
+import {CONSTITUENCIES, Constituency} from '../models/constituencies';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   public constituencyControl: AbstractControl;
   public ministerControl: AbstractControl;
   public constituencies = CONSTITUENCIES;
-  public stateConstituencies;
+  public stateConstituencies: Array<Constituency>;
   public ministers;
   public ministerSelected;
   public constituencySelected?: string;
@@ -44,7 +44,6 @@ export class HomeComponent implements OnInit {
     this.stateControl.valueChanges.subscribe(stateSelected => {
       this.setToDefault();
       this.showParticularConstituency(stateSelected);
-      console.log("STATE SELE", stateSelected)
     })
   }
 
@@ -62,21 +61,22 @@ export class HomeComponent implements OnInit {
   updateMinisterOnValueChange(){
     this.constituencyControl.valueChanges.subscribe(constituencySelected => {
       this.updateMinisterSelected();
-      this.constituencySelected = constituencySelected ? constituencySelected : null;
-      this.ministers = constituencySelected ? this.getParticularConstituency(constituencySelected).ministers : null;
+      if(constituencySelected){
+        let constituencySelectedForMinisters = this.getParticularConstituency(constituencySelected);
+        this.ministers = constituencySelectedForMinisters ? constituencySelectedForMinisters.ministers : null;
+        this.constituencySelected = constituencySelected;
+      }
     })
   }
 
   updateMinisterSelected(){
-    console.log("minister selected");
     this.ministerControl.valueChanges.subscribe(minister => {
       this.ministerSelected = minister;
-      console.log("minister selected", minister);
     })
   }
 
-  getParticularConstituency(code){
-    return this.stateConstituencies.find(item => item.code === code) || {}
+  getParticularConstituency(code): Constituency{
+    return this.stateConstituencies.find(item => item.code === code);
   }
 
 }

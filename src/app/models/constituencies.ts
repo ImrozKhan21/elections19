@@ -1,3 +1,14 @@
+export interface Constituency {
+  code: string;
+  value: string;
+  ministers: Array<MinisterCopy>;
+}
+
+export interface MinisterCopy {
+  name: string;
+  id: string;
+}
+
 export const CONSTITUENCIES = {
   'AN': [{ code: 'AN1', value: 'Andaman and Nicobar Islands', ministers: [{name: 'Bishnu Pada Ray', id: 'm-an1'}]}],
   'AP':[
