@@ -1,0 +1,22 @@
+<section class="minister-wrapper">
+  <div>
+    <h2>{{minister.name}}</h2>
+    <p>{{minister.state}}, {{minister.constituency}}</p>
+    <img src="{{minister.image}}" height="200px" width="175px"/>
+  </div>
+<hr>
+  <div>
+    <h3>CRIMINAL RECORD</h3>
+    <p>{{minister.criminalRecord}}</p>
+  </div>
+  <hr>
+  <div>
+    <h3>DETAILS</h3>
+    <p>{{minister.details}}</p>
+  </div>
+  <hr>
+
+  <div>
+    <button *ngIf="!hideResetButton" mat-raised-button color="primary" [routerLink]="['/home']">Reset</button>
+  </div>
+</section>

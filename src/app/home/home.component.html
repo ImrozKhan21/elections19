@@ -2,22 +2,34 @@
 
   <form class="form-section" [formGroup]="profileForm">
     <mat-form-field>
-      <mat-select placeholder="State" [formControl]="stateControl">
+      <mat-select placeholder="STATE" [formControl]="stateControl">
         <mat-option *ngFor="let state of states" [value]="state.code">
           {{state.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <!--  <mat-form-field>
-        <mat-select placeholder="Favorite food">
-          <mat-option *ngFor="let constituency of constituencies" [value]="food.value">
-            {{constituency.viewValue}}
+      <mat-form-field *ngIf="stateConstituencies && stateConstituencies.length">
+        <mat-select placeholder="CONSTITUENCY" [formControl]="constituencyControl">
+          <mat-option *ngFor="let constituency of stateConstituencies" [value]="constituency.code">
+            {{constituency.value}}
           </mat-option>
         </mat-select>
-      </mat-form-field>-->
+      </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="submitForm()">Find</button>
+    <div *ngIf="ministers && ministers.length" class="ministers-all">
+      <mat-form-field class="ministers-dropdown">
+        <mat-select placeholder="MINISTERS">
+          <mat-option *ngFor="let minister of ministers" [value]="minister.id">
+            {{minister.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" [routerLink]="['/ministers', 'AN1']">Show all</button>
+    </div>
+
+    <button mat-raised-button color="primary" [routerLink]="['/minister', 'm-an1']">Find</button>
 
   </form>
 

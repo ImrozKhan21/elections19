@@ -1,12 +1,9 @@
-export interface State {
+export interface Standard {
   code: string;
   name: string;
-
 }
 
-export const CONSTITUENCIES = {};
-
-export const STATES: Array<State> = [
+export const STATES: Array<Standard> = [
   {'code': 'AN', 'name': 'Andaman and Nicobar Islands'},
   {'code': 'AP', 'name': 'Andhra Pradesh'},
   {'code': 'AR', 'name': 'Arunachal Pradesh'},

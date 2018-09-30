@@ -1,0 +1,12 @@
+<div class="all-ministers-wrapper">
+  <div *ngFor="let minister of ministers">
+    <app-minister-view
+      [ministerInput]="minister"
+      [hideResetButton]="true"></app-minister-view>
+  </div>
+</div>
+
+<div class="reset-minister-button">
+  <button mat-raised-button color="primary" [routerLink]="['/home']">Reset</button>
+</div>
+
