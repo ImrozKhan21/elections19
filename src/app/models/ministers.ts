@@ -1,3 +1,15 @@
+export interface Minister {
+  image: string;
+  state: string;
+  constituency: string;
+  name: string;
+  party: string;
+  age: string;
+  qual: string;
+  edu: string;
+  criminalRecord: string;
+}
+
 export const MINISTERS = {
   'm-an1': {image: '../assets/images/m1.jpg',id: 'm-an1', state: 'AN', constituency: 'Andaman and Nicobar Islands', name: 'Bishnu Pada Ray', party: 'Bharatiya Janata Party', age: '68', qual: 'Graduate', edu: 'B.Com. (Hons.); Educated at Andamohan College, Calcutta, West Bengal', criminalRecord: '0'},
 'm-ap1': {image: '../assets/images/m1.jpg',id: 'm-ap1', state: 'AP', constituency: 'Amalapuram', name: 'Pandula Ravindra Babu', party: 'Telugu Desam Party', age: '62', qual: 'Professional Graduate', edu: 'M.B.B.S.', criminalRecord: '0'},

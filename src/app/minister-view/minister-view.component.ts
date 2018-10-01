@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Params, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {MinisterService} from '../services/minister.service';
+import {Minister} from '../models/ministers';
 
 
 @Component({
@@ -10,8 +11,8 @@ import {MinisterService} from '../services/minister.service';
   styleUrls: ['./minister-view.component.scss']
 })
 export class MinisterViewComponent implements OnInit {
-  minister;
-  @Input() ministerInput;
+  minister: Minister;
+  @Input() ministerInput: Minister;
   @Input() hideResetButton: boolean = false;
 
   constructor(private route: ActivatedRoute,
@@ -25,7 +26,6 @@ export class MinisterViewComponent implements OnInit {
       this.route.params
         .switchMap((params: Params) => this.ministerService.getParticularMinister(params['id']))
         .subscribe(val => {
-          console.log('val MIN COMP', val);
           this.minister = val;
         });
     }
