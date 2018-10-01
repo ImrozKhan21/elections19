@@ -14,9 +14,13 @@ import { MinistersViewComponent } from './ministers-view/ministers-view.componen
 import { MinisterViewComponent } from './minister-view/minister-view.component';
 
 import {MinisterService} from './services/minister.service';
+import {GeoLocationService} from './services/geo-location.service';
 
 import { StoreModule } from '@ngrx/store';
 import { reducer} from './reducers/home.reducer';
+
+import {HttpClientModule, HttpClient} from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -36,12 +40,13 @@ import { reducer} from './reducers/home.reducer';
     ReactiveFormsModule,
     StoreModule.forRoot({
       homeState: reducer
-    })
+    }),
+    HttpClientModule
   ],
   exports: [
     HeaderComponent
   ],
-  providers: [MinisterService],
+  providers: [MinisterService, GeoLocationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {STATES} from '../models/app.constants';
 import {FormBuilder, FormGroup, Validators, FormControl, AbstractControl} from '@angular/forms';
 import {CONSTITUENCIES, Constituency} from '../models/constituencies';
 import { Store } from '@ngrx/store';
 import {HomeState, AppData} from '../models/app.constants';
 import * as HomeActions from './../actions/home.actions';
+import { } from '@types/googlemaps';
 
+import {GeoLocationService} from '../services/geo-location.service';
 
 @Component({
   selector: 'app-home',
@@ -24,17 +26,21 @@ export class HomeComponent implements OnInit {
   public ministerSelected: string;
   public constituencySelected;
   public provinceSelected: string;
+  public title = 'My first AGM project';
+  public latitude;
+  public longitude;
+@ViewChild('googleMap') gmapElement: any;
+  map: google.maps.Map;
   private homeState;
   private initialState?: AppData;
   private noop = () => {};
 
-  constructor(private fb: FormBuilder, private store: Store<HomeState>) {
+  constructor(private fb: FormBuilder, private store: Store<HomeState>, private geoLocationService: GeoLocationService) {
     this.homeState = store.select('homeState');
     this.homeState.subscribe(val => {
       this.initialState = val;
     });
   }
-
   setInitialValues() {
     this.stateControl.setValue(this.initialState.provinceState);
     this.constituencyControl.setValue(this.initialState.constituencyState);
@@ -43,6 +49,28 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    const mapProp = {
+      center: new google.maps.LatLng(28.4595, 77.0266),
+      zoom: 14,
+      // mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.HYBRID
+      // mapTypeId: google.maps.MapTypeId.SATELLITE
+      // mapTypeId: google.maps.MapTypeId.TERRAIN
+    };
+
+    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+    const marker = new google.maps.Marker({ position: mapProp.center });
+    marker.setMap(this.map);
+
+    const infowindow = new google.maps.InfoWindow({
+      content: 'Hey, We are here'
+    });
+    infowindow.open(this.map, marker);
+  }
+
+  setCenter(e?:any){
+    e ? e.preventDefault() : this.noop();
+    this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
   }
 
   createForm() {
@@ -93,9 +121,19 @@ export class HomeComponent implements OnInit {
         const constituencySelectedForMinisters = this.getParticularConstituency(constituencySelected);
         this.ministers = constituencySelectedForMinisters ? constituencySelectedForMinisters.ministers : null;
         this.constituencySelected = constituencySelectedForMinisters;
+        this.updateMap();
         this.setState(false);
       }
     });
+  }
+
+  updateMap(){
+    /*const address = this.geoLocationService.getCombinedConstituencyAndState(this.constituencySelected.value, this.provinceSelected);
+    this.geoLocationService.getCurrentLocationLongLat(address, 'IN').subscribe(val => {
+    this.latitude = val.results[0].geometry.location.lat;
+     this.longitude = val.results[0].geometry.location.lng;
+     this.setCenter();
+   });*/
   }
 
   updateMinisterSelected() {
