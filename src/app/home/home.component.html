@@ -26,7 +26,7 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" [routerLink]="['/ministers', constituencySelected]">Show all</button>
+      <button *ngIf="constituencySelected" mat-raised-button color="primary" [routerLink]="['/ministers', constituencySelected.value]">Show all</button>
     </div>
 
     <button *ngIf="ministerSelected" mat-raised-button color="primary" [routerLink]="['/minister', ministerSelected]">Find</button>
@@ -36,5 +36,4 @@
   <div>
     <img class="india-map" src="../../assets/images/map.jpg">
   </div>
-
 </div>

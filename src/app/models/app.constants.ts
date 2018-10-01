@@ -1,3 +1,9 @@
+export interface AppData{
+  provinceState: string;
+  constituencyState: string;
+  ministerState?: string;
+}
+
 export interface Standard {
   code: string;
   name: string;

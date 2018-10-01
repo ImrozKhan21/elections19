@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {STATES} from '../models/app.constants';
 import {FormBuilder, FormGroup, Validators, FormControl, AbstractControl} from '@angular/forms';
 import {CONSTITUENCIES, Constituency} from '../models/constituencies';
+import { Store } from '@ngrx/store';
+import {AppData} from '../models/app.constants';
+import * as HomeActions from './../actions/home.actions'
+
 
 @Component({
   selector: 'app-home',
@@ -17,10 +21,23 @@ export class HomeComponent implements OnInit {
   public constituencies = CONSTITUENCIES;
   public stateConstituencies: Array<Constituency>;
   public ministers;
-  public ministerSelected;
-  public constituencySelected?: string;
+  public ministerSelected: string;
+  public constituencySelected;
+  public provinceSelected: string;
+  homeState;
+  initialState?: AppData;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private store: Store<AppData>) {
+    this.homeState = store.select('homeState');
+    this.homeState.subscribe(val => {
+      this.initialState = val;
+    })
+  }
+
+  setInitialValues(){
+    this.stateControl.setValue(this.initialState.provinceState);
+    this.constituencyControl.setValue(this.initialState.constituencyState);
+    this.ministerControl.setValue(this.initialState.ministerState);
   }
 
   ngOnInit() {
@@ -37,34 +54,41 @@ export class HomeComponent implements OnInit {
     this.stateControl = this.profileForm.controls['state'];
     this.constituencyControl = this.profileForm.controls['constituency'];
     this.ministerControl = this.profileForm.controls['minister'];
+    this.subscribeToValueChanges();
+    this.initialState ? this.setInitialValues(): '';
+  }
+
+  subscribeToValueChanges(){
     this.listenToValueChange();
+    this.updateMinisterOnValueChange();
+    this.updateMinisterSelected();
   }
 
   listenToValueChange(){
     this.stateControl.valueChanges.subscribe(stateSelected => {
-      this.setToDefault();
+      this.initialState && this.initialState !== stateSelected ? this.setToDefault() : '';
+      this.provinceSelected = stateSelected;
       this.showParticularConstituency(stateSelected);
     })
   }
 
   setToDefault(){
     this.ministers = null;
+    this.ministerSelected = null;
     this.constituencyControl.setValue('');
   }
 
   showParticularConstituency(stateSelected: string){
     this.stateConstituencies = this.constituencies[stateSelected];
-    this.updateMinisterOnValueChange();
-    console.log("---", this.stateConstituencies)
   }
 
   updateMinisterOnValueChange(){
     this.constituencyControl.valueChanges.subscribe(constituencySelected => {
-      this.updateMinisterSelected();
       if(constituencySelected){
         let constituencySelectedForMinisters = this.getParticularConstituency(constituencySelected);
         this.ministers = constituencySelectedForMinisters ? constituencySelectedForMinisters.ministers : null;
-        this.constituencySelected = constituencySelected;
+        this.constituencySelected = constituencySelectedForMinisters;
+        this.setState(false);
       }
     })
   }
@@ -72,7 +96,14 @@ export class HomeComponent implements OnInit {
   updateMinisterSelected(){
     this.ministerControl.valueChanges.subscribe(minister => {
       this.ministerSelected = minister;
+      this.setState();
     })
+  }
+
+  setState(updateMinister = true){
+    this.store.dispatch(new HomeActions.AddProvince(this.provinceSelected));
+    this.constituencySelected ? this.store.dispatch(new HomeActions.AddConstituency(this.constituencySelected.code)) : '';
+    updateMinister ? this.store.dispatch(new HomeActions.AddMinister(this.ministerSelected)) : '';
   }
 
   getParticularConstituency(code): Constituency{

@@ -15,6 +15,9 @@ import { MinisterViewComponent } from './minister-view/minister-view.component';
 
 import {MinisterService} from './services/minister.service';
 
+import { StoreModule } from '@ngrx/store';
+import { reducer} from './reducers/home.reducer';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +33,10 @@ import {MinisterService} from './services/minister.service';
     FormsModule,
     MaterialModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({
+      homeState: reducer
+    })
   ],
   exports: [
     HeaderComponent
