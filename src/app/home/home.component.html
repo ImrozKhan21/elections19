@@ -33,9 +33,9 @@
 
   </form>
 
-  <div>
+  <div class="google-map">
     <!--<img class="india-map" src="../../assets/images/map.jpg">-->
+    <app-google-map [constituencySelected]="constituencySelected"
+                    [provinceSelected]="provinceSelected"></app-google-map>
   </div>
-  <div #googleMap style="width:75%;height:500px; margin-left: 10px"></div>
-
 </div>

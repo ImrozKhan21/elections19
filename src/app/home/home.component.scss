@@ -1,5 +1,4 @@
 .home-wrapper{
-  height: 81vh;
   padding: 12px;
   display: flex;
   flex-direction: row;
@@ -9,6 +8,7 @@
     flex-basis: 50%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 
     button{
       width:150px;
@@ -29,6 +29,7 @@
 
     .ministers-dropdown{
       flex-basis: 70%;
+      margin-right: 5px;
     }
   }
   @media only screen and (max-width: 992px) {
@@ -38,4 +39,11 @@
       margin-top: 20px;
     }
   }
+}
+.google-map, app-google-map{
+  width: 100%;
+}
+app-google-map{
+  display: flex;
+  justify-content: space-around;
 }

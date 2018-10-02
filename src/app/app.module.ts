@@ -20,6 +20,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducer} from './reducers/home.reducer';
 
 import {HttpClientModule, HttpClient} from '@angular/common/http';
+import { GoogleMapComponent } from './google-map/google-map.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
     HeaderComponent,
     FooterComponent,
     MinistersViewComponent,
-    MinisterViewComponent
+    MinisterViewComponent,
+    GoogleMapComponent
   ],
   imports: [
     BrowserModule,

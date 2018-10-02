@@ -14,7 +14,8 @@ export class GeoLocationService {
   constructor(private http: HttpClient) { }
 
   getCurrentLocationLongLat(address, region){
-    const url = `${this.geoCodingUrl}?address=${address}&?region=${region}?key=${this.apiKey}`;
+    const url = `${this.geoCodingUrl}?address=${address}&?region=${region}?key=${this.apiKey}`
+    console.log('URL', url)
     return this.http.get(url).pipe(
       tap(location => {
       })
