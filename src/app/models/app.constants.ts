@@ -4,6 +4,10 @@ export interface AppData{
   ministerState?: string;
 }
 
+export interface HomeState {
+  readonly homeState: AppData;
+}
+
 export interface Standard {
   code: string;
   name: string;

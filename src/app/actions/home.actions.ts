@@ -1,10 +1,10 @@
 // Section 1
-import { Injectable } from '@angular/core'
-import { Action } from '@ngrx/store'
+import { Injectable } from '@angular/core';
+import { Action } from '@ngrx/store';
 // Section 2
 export const ADD_PROVINCE = 'Add Province';
 export const ADD_CONSTITUENCY = 'Add Constituency';
-export const ADD_MINISTER= 'Add Minister';
+export const ADD_MINISTER = 'Add Minister';
 
 // Section 3
 export class AddProvince implements Action {
@@ -25,4 +25,4 @@ export class AddMinister implements Action {
 }
 
 // Section 4
-export type Actions = AddProvince | AddConstituency | AddMinister
+export type Actions = AddProvince | AddConstituency | AddMinister;

@@ -16,7 +16,7 @@ body {
 }
 
 .container {
-  margin: 20px;
+  height: 100vh;
   display:flex;
   flex-direction: column;
 }
@@ -24,7 +24,12 @@ body {
 .width-100{
   width: 100%;
 }
-
+#map {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px
+}
 $lt-gray: #ddd;
 $background-dark: #512DA8;
 $background-light: #9575CD;

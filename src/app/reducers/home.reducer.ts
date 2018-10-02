@@ -1,6 +1,6 @@
-import { Action } from '@ngrx/store'
+import { Action } from '@ngrx/store';
 import { AppData} from '../models/app.constants';
-import * as HomeActions from './../actions/home.actions'
+import * as HomeActions from './../actions/home.actions';
 
 // Section 1
 const initialState: AppData = {
@@ -12,7 +12,7 @@ const initialState: AppData = {
 // Section 2
 export function reducer(state: AppData = initialState, action: HomeActions.Actions) {
   // Section 3
-  switch(action.type) {
+  switch (action.type) {
     case HomeActions.ADD_PROVINCE:
       return {...state, provinceState: action.payload};
     case HomeActions.ADD_CONSTITUENCY:
