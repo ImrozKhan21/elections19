@@ -1,15 +1,14 @@
 <section>
   <div class="minister-wrapper">
     <h2>{{minister.name}}</h2>
-    <p>Party: <b>{{minister.party}}</b></p>
-    <p>{{minister.state}}, {{minister.constituency}}</p>
-    <img src="{{minister.image}}" height="200px" width="175px"/>
+    <p>Party: <b>{{minister.party}}</b>, {{minister.constituency}}, {{minister.state}}</p>
+    <img src="{{minister.image}}" height="175px" width="175px"/>
     <p>Age: {{minister.age}}</p>
     <p>Education: {{minister.qual}}, {{minister.edu}}</p>
     <hr>
     <div>
-      <h3>CRIMINAL RECORD</h3>
-      <p>{{minister.criminalRecord !=='0' ? minister.criminalRecord  : 'No Criminal Record'}}</p>
+      <h3>CRIMINAL HISTORY</h3>
+      <p>{{minister.criminalRecord !=='0' ? minister.criminalRecord  : 'No Criminal Record Foundi '}}</p>
     </div>
   </div>
   <div class="back-button">
