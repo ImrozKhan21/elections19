@@ -15,6 +15,7 @@ import { MinisterViewComponent } from './minister-view/minister-view.component';
 
 import {MinisterService} from './services/minister.service';
 import {GeoLocationService} from './services/geo-location.service';
+import {ImageSearchService} from './services/image-search.service';
 
 import { StoreModule } from '@ngrx/store';
 import { reducer} from './reducers/home.reducer';
@@ -46,7 +47,7 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
   exports: [
     HeaderComponent
   ],
-  providers: [MinisterService, GeoLocationService],
+  providers: [MinisterService, GeoLocationService, ImageSearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

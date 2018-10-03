@@ -8,6 +8,10 @@ export const environment = {
   apiKey: 'AIzaSyAOQ4ThSmunEs7qWrOclb0jxVY0Ez-vqZw',
   apiEndPoints: {
     geoCoding: 'https://maps.googleapis.com/maps/api/geocode/json',
-    geoCodingMock: 'https://maps.googleapis.com/maps/api/geocode/json?address=Toledo&region=es&key=YOUR_API_KEY'
-  }
+    geoCodingMock: 'https://maps.googleapis.com/maps/api/geocode/json?address=Toledo&region=es&key=YOUR_API_KEY',
+    googleSearch: 'https://www.googleapis.com/customsearch/v1?key=',
+    cxCode: '004456939783387997491:877yxvo9iuu'
+  },
+  PIXABAY_API_URL: "https://pixabay.com/api/?key=",
+  PIXABAY_API_KEY:"6484654-3aa417d81f64cf151c8beba31"
 };

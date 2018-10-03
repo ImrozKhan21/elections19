@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
         const constituencySelectedForMinisters = this.getParticularConstituency(constituencySelected);
         this.ministers = constituencySelectedForMinisters ? constituencySelectedForMinisters.ministers : null;
         this.constituencySelected = constituencySelectedForMinisters;
-        this.updateMap();
+        //this.updateMap();
         this.setState(false);
       }
     });
