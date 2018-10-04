@@ -1,8 +1,8 @@
 <section class="minister-page">
-  <div class="minister-wrapper">
+  <div class="minister-wrapper" *ngIf="minister">
     <h2>{{minister.name}}</h2>
     <p>Party: <b>{{minister.party}}</b>, {{minister.constituency}}, {{minister.state}}</p>
-    <img src="{{minister.image}}" height="175px" width="175px"/>
+    <img [src]="image" height="200px" width="175px"/>
     <p>Age: {{minister.age}}</p>
     <p>Education: {{minister.qual}}, {{minister.edu}}</p>
     <hr>
@@ -10,6 +10,10 @@
       <h3>CRIMINAL HISTORY</h3>
       <p>{{minister.criminalRecord !=='0' ? minister.criminalRecord  : 'No Criminal Record Foundi '}}</p>
     </div>
+  </div>
+
+  <div *ngIf="!minister">
+    Sorry we are not able to find the specific details of this minsiter at this time. Please try again some other time.
   </div>
   <div class="back-button">
     <button *ngIf="!hideResetButton" mat-raised-button color="primary" [routerLink]="['/home']">Back</button>

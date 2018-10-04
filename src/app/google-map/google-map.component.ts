@@ -8,8 +8,8 @@ import {GeoLocationService} from '../services/geo-location.service';
   styleUrls: ['./google-map.component.scss']
 })
 export class GoogleMapComponent implements OnInit {
-  public latitude;
-  public longitude;
+  public latitude = 28.4595;
+  public longitude = 77.0266;
   @ViewChild('googleMap') gmapElement: any;
   map: google.maps.Map;
   @Input() provinceSelected;
@@ -24,10 +24,10 @@ export class GoogleMapComponent implements OnInit {
 
   setMap() {
     const mapProp = {
-      center: new google.maps.LatLng(28.4595, 77.0266),
+      center: new google.maps.LatLng(this.latitude, this.longitude),
       zoom: 14,
-      // mapTypeId: google.maps.MapTypeId.ROADMAP
-      mapTypeId: google.maps.MapTypeId.HYBRID
+       mapTypeId: google.maps.MapTypeId.ROADMAP
+      //mapTypeId: google.maps.MapTypeId.HYBRID
       // mapTypeId: google.maps.MapTypeId.SATELLITE
       // mapTypeId: google.maps.MapTypeId.TERRAIN
     };
@@ -44,16 +44,24 @@ export class GoogleMapComponent implements OnInit {
 
   setCenter(e?: any) {
     e ? e.preventDefault() : '';
-    this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
+    this.setMap();
+    //this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
   }
 
   updateMap() {
     const address = this.geoLocationService.getCombinedConstituencyAndState(this.constituencySelected.value, this.provinceSelected);
     this.geoLocationService.getCurrentLocationLongLat(address, 'IN').subscribe(val => {
       console.log('val MAP', val);
-      this.latitude = val.results[0].geometry.location.lat;
-      this.longitude = val.results[0].geometry.location.lng;
-      this.setCenter();
+      if(val.status === "OVER_QUERY_LIMIT"){
+        setTimeout(()=> {
+          this.updateMap();
+          console.log("in set time out")
+        }, 1000)
+      }else{
+        this.latitude = val.results[0].geometry.location.lat;
+        this.longitude = val.results[0].geometry.location.lng;
+        this.setCenter();
+      }
     });
   }
 
@@ -62,6 +70,8 @@ export class GoogleMapComponent implements OnInit {
     if (currentItem && currentItem.currentValue) {
       if (!currentItem.previousValue || currentItem.previousValue.code !== currentItem.currentValue.code) {
         this.updateMap();
+        console.log("IN CHANGEE")
+
       }
     }
 
