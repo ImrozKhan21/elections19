@@ -56,7 +56,7 @@ export class GoogleMapComponent implements OnInit {
         setTimeout(()=> {
           this.updateMap();
           console.log("in set time out")
-        }, 1000)
+        }, 100)
       }else{
         this.latitude = val.results[0].geometry.location.lat;
         this.longitude = val.results[0].geometry.location.lng;
