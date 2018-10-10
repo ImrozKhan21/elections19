@@ -21,7 +21,6 @@ export class GeoLocationService {
 
   getCurrentLocationLongLat(address, region): Observable<GeoResponse>{
     const url = `${this.geoCodingUrl}?address=${address}&?region=${region}?key=${this.apiKey}`
-    console.log('URL', url)
     return this.http.get(url).pipe(
       tap(location => {
         return location;

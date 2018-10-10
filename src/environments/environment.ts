@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiKey: 'AIzaSyBFSJlZFmeeleZe2bNq78Q-4xEFKAPTBis',
+  apiKey: 'AIzaSyDM8fneVLsDYGHvtWsIPA0lcaQmhQlg70w',
   apiEndPoints: {
     geoCoding: 'https://maps.googleapis.com/maps/api/geocode/json',
     geoCodingMock: 'https://maps.googleapis.com/maps/api/geocode/json?address=Toledo&region=es&key=YOUR_API_KEY',

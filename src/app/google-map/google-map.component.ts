@@ -51,12 +51,10 @@ export class GoogleMapComponent implements OnInit {
   updateMap() {
     const address = this.geoLocationService.getCombinedConstituencyAndState(this.constituencySelected.value, this.provinceSelected);
     this.geoLocationService.getCurrentLocationLongLat(address, 'IN').subscribe(val => {
-      console.log('val MAP', val);
       if(val.status === "OVER_QUERY_LIMIT"){
         setTimeout(()=> {
           this.updateMap();
-          console.log("in set time out")
-        }, 100)
+        }, 5000)
       }else{
         this.latitude = val.results[0].geometry.location.lat;
         this.longitude = val.results[0].geometry.location.lng;
