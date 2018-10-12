@@ -91,6 +91,7 @@ export class HomeComponent implements OnInit {
   updateMinisterOnValueChange() {
     this.constituencyControl.valueChanges.subscribe(constituencySelected => {
       if (constituencySelected) {
+        this.ministerSelected = null;
         const constituencySelectedForMinisters = this.getParticularConstituency(constituencySelected);
         this.ministers = constituencySelectedForMinisters ? constituencySelectedForMinisters.ministers : null;
         this.constituencySelected = constituencySelectedForMinisters;
