@@ -53,7 +53,7 @@ export class GoogleMapComponent implements OnInit {
     this.geoLocationService.getCurrentLocationLongLat(address, 'IN').subscribe(val => {
       if(val.status === "OVER_QUERY_LIMIT"){
         setTimeout(()=> {
-          this.updateMap();
+         // this.updateMap();
         }, 5000)
       }else{
         this.latitude = val.results[0].geometry.location.lat;
