@@ -16,7 +16,7 @@ import {GeoLocationService} from '../services/geo-location.service';
 })
 export class HomeComponent implements OnInit {
   public states = STATES;
-  public profileForm: FormGroup;
+    public profileForm: FormGroup;
   public stateControl: AbstractControl;
   public constituencyControl: AbstractControl;
   public ministerControl: AbstractControl;

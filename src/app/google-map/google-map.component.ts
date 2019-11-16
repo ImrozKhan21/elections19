@@ -45,7 +45,7 @@ export class GoogleMapComponent implements OnInit {
   setCenter(e?: any) {
     e ? e.preventDefault() : '';
     this.setMap();
-    //this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
+    this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
   }
 
   updateMap() {
